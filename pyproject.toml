@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "harparse"
+version = "0.0.1"
+description = "HAR file parser and extractor"
+authors = ["James Hogkinson <james@terminaloutcomes.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+click = "^8.0.4"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.13.1"
+black = "^22.1.0"
+pytest = "^7.1.1"
+mypy = "^0.942"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+harparse = "harparse.__main__:cli"
