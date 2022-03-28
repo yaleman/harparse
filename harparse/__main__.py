@@ -7,6 +7,8 @@ from base64 import b64decode
 import binascii
 
 # import os
+import json
+
 import sys
 from typing import Optional
 from pathlib import Path
@@ -157,6 +159,7 @@ def extract(
                 raise NotImplementedError(f"Encoding is {encoding}, need to handle it")
             else:
                 print("Not sure how you got here... ?", file=sys.stderr)
+                print(json.dumps(file, indent=4, default=str))
                 sys.exit(1)
 
 
