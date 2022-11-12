@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "harparse"
-version = "0.0.1"
+version = "0.0.2"
 description = "HAR file parser and extractor"
 authors = [
     "James Hogkinson <james@terminaloutcomes.com>",
@@ -26,11 +26,3 @@ requires = [
 ]
 build-backend = "poetry.core.masonry.api"
 
-[project]
-name = "harparse"
-description = "HAR file parser and extractor"
-license = "MIT"
-version = "0.0.1"
-authors = [
-    { name = "James Hogkinson", email = "james@terminaloutcomes.com" },
-]

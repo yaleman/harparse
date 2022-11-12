@@ -5,7 +5,7 @@ from json import JSONDecodeError
 import os
 from pathlib import Path
 import sys
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 from  urllib.parse import urlparse
 
 import click
@@ -21,7 +21,8 @@ def loadfile(fileobject: str) -> Optional[Dict[str, Any]]:
     if "log" not in data:
         print("No log? Quitting")
         sys.exit(1)
-    return data["log"]
+    res: Optional[Dict[str, Any]]  = data.get("log")
+    return res
 
 
 
@@ -46,14 +47,15 @@ def create_extract_directory(filename: str) -> bool:
     """ creates the file extraction directory in '~/Downloads/"""
     directory_name = get_extract_directory(filename)
     print(f"Extraction directory: {directory_name}")
-    if os.path.exists(directory_name):
-        if not os.path.isdir:
+
+    if directory_name.exists():
+        if not directory_name.is_dir():
             raise ValueError()
         return True
     os.mkdir(directory_name)
     return os.path.exists(directory_name)
 
-def get_filedata_filename(filedata: dict):
+def get_filedata_filename(filedata: Dict[str, Any]) -> str:
     """ gets the filename from the filedata, typically just the last bit of the URL """
     url = filedata.get("request", {}).get("url", False)
     if not url:
@@ -61,4 +63,5 @@ def get_filedata_filename(filedata: dict):
     parsed = urlparse(url)
     if not parsed.path:
         raise ValueError(f"Couldn't get a filename from {url}")
-    return parsed.path.split("/")[-1]
+    path = str(parsed.path)
+    return path.rsplit("/", maxsplit=1)[-1]

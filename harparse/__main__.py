@@ -10,7 +10,7 @@ import binascii
 import json
 
 import sys
-from typing import Optional
+from typing import Optional, Tuple
 from pathlib import Path
 
 
@@ -19,7 +19,7 @@ import click
 from . import loadfile, prompt_user_input, get_extract_directory, get_filedata_filename, create_extract_directory
 
 @click.group()
-def cli():
+def cli() -> None:
     """ CLI interface """
 
 
@@ -33,7 +33,7 @@ def cli():
 @click.argument("filename")
 def list_urls(
     filename: str,
-    match_method: tuple,
+    match_method: Tuple[str,],
     ) -> None:
     """ Lists the URLS in the HAR file."""
 
@@ -73,10 +73,10 @@ def list_urls(
 # pylint: disable=too-many-branches,too-many-locals,too-many-statements
 def extract(
     filename: str,
-    filterstr: tuple,
+    filterstr: Tuple[str,],
     noninteractive: bool,
     output_dir: Optional[Path],
-    match_method: tuple,
+    match_method: Tuple[str,],
     ) -> None:
     """ does the file extraction bit """
 
